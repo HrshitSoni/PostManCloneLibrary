@@ -49,6 +49,7 @@
             // 
             ApiLinktextBox.Location = new Point(12, 44);
             ApiLinktextBox.Name = "ApiLinktextBox";
+            ApiLinktextBox.ScrollBars = ScrollBars.Horizontal;
             ApiLinktextBox.Size = new Size(662, 27);
             ApiLinktextBox.TabIndex = 1;
             // 
@@ -60,6 +61,7 @@
             FetchButton.TabIndex = 2;
             FetchButton.Text = "Fetch";
             FetchButton.UseVisualStyleBackColor = true;
+            FetchButton.Click += FetchButton_Click;
             // 
             // ResponseLabel
             // 
@@ -73,9 +75,12 @@
             // 
             // ResponseTextBox
             // 
+            ResponseTextBox.BackColor = Color.White;
             ResponseTextBox.Location = new Point(12, 126);
             ResponseTextBox.Multiline = true;
             ResponseTextBox.Name = "ResponseTextBox";
+            ResponseTextBox.ReadOnly = true;
+            ResponseTextBox.ScrollBars = ScrollBars.Both;
             ResponseTextBox.Size = new Size(662, 312);
             ResponseTextBox.TabIndex = 4;
             // 

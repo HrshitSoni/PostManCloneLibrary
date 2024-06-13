@@ -12,7 +12,7 @@ namespace PostManCloneLibrary
     public class ApiAccess
     {
         private readonly HttpClient httpClient = new(); 
-        public async Task<string> CallApi(string url)
+        public async Task<string> CallApi(string url , httpMethods method = httpMethods.GET)
         {
             var response = await httpClient.GetAsync(url);
 
@@ -28,6 +28,15 @@ namespace PostManCloneLibrary
             {
                 return $"Error : {response.StatusCode}";
             }
+        }
+
+        public bool validateUrl(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

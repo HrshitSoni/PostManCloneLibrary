@@ -33,6 +33,7 @@
             FetchButton = new Button();
             ResponseLabel = new Label();
             ResponseTextBox = new TextBox();
+            ResetButton = new Button();
             SuspendLayout();
             // 
             // ApiLinkLabel
@@ -84,11 +85,22 @@
             ResponseTextBox.Size = new Size(662, 312);
             ResponseTextBox.TabIndex = 4;
             // 
+            // ResetButton
+            // 
+            ResetButton.Location = new Point(694, 91);
+            ResetButton.Name = "ResetButton";
+            ResetButton.Size = new Size(94, 29);
+            ResetButton.TabIndex = 5;
+            ResetButton.Text = "Reset";
+            ResetButton.UseVisualStyleBackColor = true;
+            ResetButton.Click += ResetButton_Click;
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(ResetButton);
             Controls.Add(ResponseTextBox);
             Controls.Add(ResponseLabel);
             Controls.Add(FetchButton);
@@ -108,5 +120,6 @@
         private Button FetchButton;
         private Label ResponseLabel;
         private TextBox ResponseTextBox;
+        private Button ResetButton;
     }
 }

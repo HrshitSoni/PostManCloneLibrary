@@ -36,7 +36,11 @@ namespace PostManCloneLibrary
             {
                 return false;
             }
-            return true;
+
+            bool output = Uri.TryCreate(url, UriKind.Absolute, out Uri? urioutput)
+                && (urioutput.Scheme == Uri.UriSchemeHttp || urioutput.Scheme == Uri.UriSchemeHttps);
+
+            return output;
         }
     }
 }

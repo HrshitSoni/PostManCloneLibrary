@@ -108,7 +108,7 @@
             Controls.Add(ApiLinkLabel);
             Name = "Dashboard";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "9";
+            Text = "Post_Man_Clone";
             ResumeLayout(false);
             PerformLayout();
         }

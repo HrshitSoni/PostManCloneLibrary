@@ -4,7 +4,7 @@ namespace PostManCloneUI
 {
     public partial class Dashboard : Form
     {
-        private readonly ApiAccess api = new();
+        private readonly IApiAccess api = new ApiAccess();
         public Dashboard()
         {
             InitializeComponent();
@@ -38,19 +38,19 @@ namespace PostManCloneUI
             {
                 try
                 {
-                    ResponseTextBox.Text = await api.CallApi(ApiLinktextBox.Text);
+                    ResponseTextBox.Text += await api.CallApi(ApiLinktextBox.Text) + Environment.NewLine;
                 }
                 catch (Exception ex)
                 {
-                    ResponseTextBox.Text = "Error" + ex.Message;
+                    ResponseTextBox.Text += "Error" + ex.Message + Environment.NewLine;
+                    
                 }
             }
             else
             {
-                ResponseTextBox.Text = "Invalid Url";
+                ResponseTextBox.Text += "Invalid Url" + Environment.NewLine;
                 return;
             }
-
         }
 
         private void ResetButton_Click(object sender, EventArgs e)

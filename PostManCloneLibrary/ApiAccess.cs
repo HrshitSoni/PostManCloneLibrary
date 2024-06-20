@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace PostManCloneLibrary
 {
-    public class ApiAccess
+    public class ApiAccess : IApiAccess
     {
-        private readonly HttpClient httpClient = new(); 
-        public async Task<string> CallApi(string url , httpMethods method = httpMethods.GET)
+        private readonly HttpClient httpClient = new();
+        public async Task<string> CallApi(string url, httpMethods method = httpMethods.GET)
         {
             var response = await httpClient.GetAsync(url);
 

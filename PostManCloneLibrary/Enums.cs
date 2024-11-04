@@ -2,5 +2,9 @@
 
 public enum httpMethods
 {
-    GET
+    GET,
+    POST,
+    PUT,
+    DELETE,
+    PATCH
 }

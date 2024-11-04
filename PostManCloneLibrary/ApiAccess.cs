@@ -12,21 +12,53 @@ namespace PostManCloneLibrary
     public class ApiAccess : IApiAccess
     {
         private readonly HttpClient httpClient = new();
-        public async Task<string> CallApi(string url, httpMethods method = httpMethods.GET)
+
+        public async Task<string> CallApi(string url, httpMethods method,string? jsonBody)
         {
-            var response = await httpClient.GetAsync(url);
+            HttpResponseMessage responseMessage;
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string json = await response.Content.ReadAsStringAsync();
-                var jsonElement = JsonSerializer.Deserialize<JsonElement>(json);
-                string prettyjson = JsonSerializer.Serialize(jsonElement, new JsonSerializerOptions { WriteIndented = true });
+                switch (method)
+                {
+                    case httpMethods.GET:
+                        responseMessage = await httpClient.GetAsync(url);
+                        break;
 
-                return prettyjson;
+                    case httpMethods.POST:
+                        responseMessage = await httpClient.PostAsync(url, new StringContent(jsonBody ?? "", Encoding.UTF8, "application/json"));
+                        break;
+
+                    case httpMethods.PUT:
+                        responseMessage = await httpClient.PutAsync(url, new StringContent(jsonBody ?? "", Encoding.UTF8, "application/json"));
+                        break;
+
+                    case httpMethods.DELETE:
+                        responseMessage = await httpClient.DeleteAsync(url);
+                        break;
+
+                    case httpMethods.PATCH:
+                        responseMessage = await httpClient.PatchAsync(url, new StringContent(jsonBody ?? "", Encoding.UTF8, "application/json"));
+                        break;
+
+                    default:
+                        return "Unsupported http method";
+                }
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    string json = await responseMessage.Content.ReadAsStringAsync();
+                    var jsonElement = JsonSerializer.Deserialize<JsonElement>(json);
+                    return JsonSerializer.Serialize(jsonElement, new JsonSerializerOptions { WriteIndented = true });
+                }
+                else
+                {
+                    return $"Error : {responseMessage.StatusCode}";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return $"Error : {response.StatusCode}";
+                return $"Request Failed {ex.Message}";
             }
         }
 

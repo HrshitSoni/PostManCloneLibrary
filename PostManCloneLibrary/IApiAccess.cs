@@ -3,7 +3,8 @@ namespace PostManCloneLibrary
 {
     public interface IApiAccess
     {
-        Task<string> CallApi(string url, httpMethods method = httpMethods.GET);
         bool validateUrl(string url);
+
+        Task<string> CallApi(string url, httpMethods method, string? jsonBody);
     }
 }
